@@ -45,3 +45,53 @@ class DiskSimulator:
         self.set_head(track)
 
         return total_latency
+
+    def run_simulation(self, initial_track, requests):
+        sortedRequests = self.scheduling_strategy.schedule(initial_track, requests)
+        self.set_head(initial_track)
+
+        total_latency = 0
+
+        # Atender requests
+        for request in sortedRequests:
+            latency = self.calculate_latency(request, self.head)
+            print(f"Bloco {request} - Head: {self.head} - Latência: {latency:.2f}")
+            total_latency += latency
+
+        return total_latency
+
+    def plot_total_latency(self, initial_track, requests, strategies):
+        total_latencies = []
+
+        for strategy in strategies:
+            self.set_scheduling(strategy)
+            total_latency = self.run_simulation(initial_track, requests)
+            print()
+            total_latencies.append(total_latency)
+
+        plt.figure(figsize=(10, 6))
+        plt.bar(
+            [str(strategy.__class__.__name__) for strategy in strategies],
+            total_latencies,
+        )
+        plt.xlabel("Algoritmo de Simulação")
+        plt.ylabel("Latência Total (milliseconds)")
+        plt.title("Latência Total para Diferentes Algoritmos.")
+        plt.savefig("disk_latency.png")
+
+
+initial = 25
+
+options = {
+    "sector_size": 512,
+    "num_tracks": 100,
+    "sectors_per_track": 32,
+    "seek_time": 3,
+    "rotation_rpm": 7500,
+    "transfer_time": 2,
+}
+
+requests = [45, 521, 30, 135, 0, 10, 89, 301, 205, 100]
+
+disk = DiskSimulator(**options)
+disk.plot_total_latency(initial, requests, [SSTF()])
