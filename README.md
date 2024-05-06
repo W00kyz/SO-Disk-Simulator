@@ -1,2 +1,42 @@
-# SO-Disk-Simulator
-Trabalho da disciplina de Sistemas Operacionais para um simulador de disco rígido.
+# SO-Disk-Simulator 
+
+## QUESTÃO 2
+
+Escreva um simulador de disco que permita indicar qual a latência de acesso para uma lista de blocos indicados como dados de entrada. Aqui o simulador deve receber uma configuração que inclua:
+
+1. tamanho do setor
+2. quantidade de trilhas no disco
+3. quantidade de setores por trilha
+4. tempo de seek, rotação e transferência de dados
+
+O simulador deve incorporar um dos algoritmos de scheduling:
+
+1. SSTF
+2. SPTF
+3. F-SCAN
+4. C-SCAN
+5. C-SCAN + anticipatory 
+
+## Setup inicial
+
+- `Python:` Linguagem utilizada no projeto.
+
+```bash
+python 3.9
+```
+
+- `Matplotlib:` Biblioteca de software para criação de gráficos e visualizações de dados.
+
+```bash
+pip install matplotlib  
+```
+
+## COMO EXECUTAR 
+
+```bash
+python diskScheduler.py
+```
+
+## DOCUMENTO DO PROJETO
+
+- *[Em desenvolvimento]()*
