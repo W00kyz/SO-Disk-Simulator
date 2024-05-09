@@ -34,6 +34,8 @@ pip install matplotlib numpy
 
 ## COMO EXECUTAR 
 
+Altere os parâmetros do disco no config.ini. Uma lista de requests pode ser encontrada no arquivo main.py
+
 ```bash
 python main.py
 ```
