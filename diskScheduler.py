@@ -1,7 +1,4 @@
 import random
-import statistics
-from httpx import head
-import matplotlib.pyplot as plt
 
 
 class DiskSimulator:

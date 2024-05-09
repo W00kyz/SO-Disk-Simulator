@@ -26,17 +26,18 @@ python 3.9
 ```
 
 - `Matplotlib:` Biblioteca de software para criação de gráficos e visualizações de dados.
+- `Numpy:` Biblioteca para processamento de arranjos e matrizes grandes e multi-dimensionais.
 
 ```bash
-pip install matplotlib  
+pip install matplotlib numpy
 ```
 
 ## COMO EXECUTAR 
 
 ```bash
-python diskScheduler.py
+python main.py
 ```
 
 ## DOCUMENTO DO PROJETO
 
-- *[Em desenvolvimento]()*
+- *[Documento](https://docs.google.com/document/d/1JHo7JTkJMtmudXlRcFw4E-dY8jndV9HFU2wjJ9msoEI/edit?usp=sharing)*

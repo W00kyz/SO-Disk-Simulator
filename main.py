@@ -1,5 +1,4 @@
 import configparser
-import matplotlib.pyplot as plt
 from diskScheduler import DiskSimulator
 from statisticsDisk import *
 
