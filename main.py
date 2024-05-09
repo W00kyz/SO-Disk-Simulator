@@ -20,6 +20,8 @@ def main():
     disk_settings, simulation_settings = read_config("config.ini")
 
     disk = DiskSimulator(**disk_settings)
+    plotBarLatency(disk, simulation_settings["sizes"])
+    plotRequestsLatency(disk)
 
 
 if __name__ == "__main__":

@@ -4,26 +4,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def plotLatency(disk, request):
-    latencies = []
-    seek_distances = []
-    for block in request:
-        latency, seek_distance = disk.calculate_latency(block)
-        latencies.append(latency)
-        seek_distances.append(seek_distance)
-
-    plt.plot(latencies, label="Latency")
-    plt.plot(seek_distances, label="Seek Distance")
-    plt.xlabel("Block Index")
-    plt.ylabel("Latency/Seek Distance")
-    plt.title("Latency and Seek Distance for Request")
-    plt.legend()
-    plt.show()
-
-
 def plotBarLatency(disk, sizes):
 
-    aleatories, sequentials = generateRandomLists(sizes)
+    aleatories, sequentials = __generateRandomLists(sizes)
 
     categorias = ("SSTF", "SCAN")
 
@@ -57,11 +40,11 @@ def plotBarLatency(disk, sizes):
     ax.legend(loc="upper left", ncols=2)
 
     plt.savefig("imgs/comparasion_latency.png")
-
+    plt.close()
     return
 
 
-def generateRandomLists(sizes):
+def __generateRandomLists(sizes):
     aleatories = [[random.randint(0, 1000) for _ in range(size)] for size in sizes]
     sequentials = [[i for i in range(size)] for size in sizes]
 
@@ -99,6 +82,7 @@ def plotRequestsLatency(disk, max_size=100):
     plt.ylabel("Latência (ms)")
     plt.title("Latência em Função da Quantidade de Requisições")
     plt.legend()
-    plt.savefig("imgs/latency_by_num_req")
+    plt.savefig("imgs/latency_by_num_req.png")
+    plt.close()
 
     return
