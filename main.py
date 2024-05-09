@@ -22,6 +22,20 @@ def main():
     plotBarLatency(disk, simulation_settings["sizes"])
     plotRequestsLatency(disk)
 
+    requests = [
+        45,
+        30,
+        70,
+        125,
+        301,
+        458,
+        327,
+        543,
+    ]
+
+    print(f"Latência SSTF: {(disk.sstf(requests)):.2f}ms")
+    print(f"Latência SCAN: {(disk.scan(requests)):.2f}ms")
+
 
 if __name__ == "__main__":
     main()
