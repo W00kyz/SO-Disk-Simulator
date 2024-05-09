@@ -21,8 +21,6 @@ def main():
 
     disk = DiskSimulator(**disk_settings)
 
-    plotBarLatency(disk, simulation_settings["sizes"])
-
 
 if __name__ == "__main__":
     main()

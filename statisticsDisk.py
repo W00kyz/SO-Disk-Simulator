@@ -1,6 +1,5 @@
 from cProfile import label
 import random
-import attr
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -57,7 +56,7 @@ def plotBarLatency(disk, sizes):
     ax.set_xticks(x + width, categorias)
     ax.legend(loc="upper left", ncols=2)
 
-    plt.show()
+    plt.savefig("imgs/comparasion_latency.png")
 
     return
 
@@ -69,29 +68,37 @@ def generateRandomLists(sizes):
     return aleatories, sequentials
 
 
-def plotRequestsLatency(disk, sizes):
-
-    aleatories, sequentials = generateRandomLists(sizes)
+def plotRequestsLatency(disk, max_size=100):
 
     latency_aleatories_sstf = []
     latency_sequentials_sstf = []
     latency_aleatories_scan = []
     latency_sequentials_scan = []
 
-    for aleatory, sequential in zip(aleatories, sequentials):
-        latency_aleatories_sstf.append(disk.sstf(aleatory))
-        latency_sequentials_sstf.append(disk.sstf(sequential))
-        latency_aleatories_scan.append(disk.scan(aleatory))
-        latency_sequentials_scan.append(disk.scan(sequential))
+    for size in range(1, max_size + 1):
+        aleatories = [random.randint(0, 511) for _ in range(size)]
+        sequentials = [i for i in range(size)]
 
-    plt.plot(sizes, latency_aleatories_sstf, label="Latência Aleatório")
-    plt.plot(sizes, latency_sequentials_sstf, label="Latência Sequencial")
+        req_aleatory = aleatories.copy()
+        req_sequential = sequentials.copy()
 
-    plt.xlabel("Tipo de Acesso")
-    plt.ylabel("Latência Total")
-    plt.title("Comparação entre Acesso Aleatório e Sequencial")
+        # Calculando a latência para SSTF com requisições aleatórias e sequenciais
+        latency_aleatories_sstf.append(disk.sstf(req_aleatory))
+        latency_sequentials_sstf.append(disk.sstf(req_sequential))
 
+        # Calculando a latência para SCAN com requisições aleatórias e sequenciais
+        latency_aleatories_scan.append(disk.scan(req_aleatory))
+        latency_sequentials_scan.append(disk.scan(req_sequential))
+
+    plt.plot(range(1, max_size + 1), latency_aleatories_sstf, label="SSTF Aleatório")
+    plt.plot(range(1, max_size + 1), latency_sequentials_sstf, label="SSTF Sequencial")
+    plt.plot(range(1, max_size + 1), latency_aleatories_scan, label="SCAN Aleatório")
+    plt.plot(range(1, max_size + 1), latency_sequentials_scan, label="SCAN Sequencial")
+
+    plt.xlabel("Quantidade de Requisições")
+    plt.ylabel("Latência (ms)")
+    plt.title("Latência em Função da Quantidade de Requisições")
     plt.legend()
-    plt.show()
+    plt.savefig("imgs/latency_by_num_req")
 
     return
